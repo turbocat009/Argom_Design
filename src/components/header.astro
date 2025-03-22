@@ -1,26 +1,36 @@
-<div class="flex flex-row p-10">
+<div class="flex flex-row p-10 pb-0">
     <a href="https://argom.biz" target="_blank" rel="noopener noreferrer">
         <img src="/logo.png" alt="Logo de Argom Seals S.L.">
     </a>    
     <nav id="MENU" class="flex flex-row justify-end w-full">
-        <ul class="flex flex-row gap-5 align-middle pr-12 mt-2"> 
+        <ul id="AREAP" class="flex flex-row gap-5 align-middle pr-12 mt-2"> 
             <li><a href="/#">MI CUENTA</a></li>
             <li><a href="/#">INICIO</a></li>
             <li><a href="/#">BUSCAR</a></li>
             <li><a href="/#">HISTORICO</a></li>
             <li><a href="/#">CARRITO</a></li>
-            <li><a id="CLOSE" class="px-6 rounded-2xl bg-amber-400">CERRAR</a></li>
+            <li><a id="CLOSE" class="px-6 py-1 my-1 rounded-2xl bg-amber-400">CERRAR</a></li>
         </ul>
         <a id="OPEN" class="bg-blue-900 rounded-2xl px-6 py-1 my-1 absolute text-white">AREA PRIVADA</a>
     </nav>
     <script>
-        document.getElementById('OPEN').addEventListener('click', () => {
-            alert('Abriendo area privada');
-        });
-        document.getElementById('CLOSE').addEventListener('click', () => {
-            alert('Cerrando area privada');
-        });
+        const openButton = document.getElementById('OPEN');
+        const closeButton = document.getElementById('CLOSE');
+        const menu = document.getElementById('AREAP');
+
+        if (openButton && closeButton && menu) {
+            openButton.addEventListener('click', () => {
+                openButton.style.display = 'none';
+                menu.style.display = 'flex';
+            });
+
+            closeButton.addEventListener('click', () => {
+                menu.style.display = 'none';
+                openButton.style.display = 'block';
+            });
+
+            // Initialize the state
+            menu.style.display = 'none';
+        }
     </script>
 </div>
-
-```TODO: Make button seam clickable and not text selectable```

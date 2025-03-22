@@ -1,9 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { types } from "../data/types.js";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
+<Layout title="Argom Seals S.l.">
+    <ul
+        class="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 m-5"
+    >
+        {
+            types.map((type) => (
+                <li class="bg-[#00000010] rounded-xl p-4 max-w-[500px]">
+                    <a href={`/${type.id}`}>
+                        <img src="/favicon.svg" alt="Foto del producto" />
+                        <h2 class="w-full text-center pt-5 font-semibold">
+                            {type.name}
+                        </h2>
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
 </Layout>

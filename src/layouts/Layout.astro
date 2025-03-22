@@ -1,6 +1,9 @@
 ---
 import "./src/styles/global.css";
 import Header from "../components/header.astro";
+import Menu from "../components/sideMenu.astro";
+
+const {title} = Astro.props;
 ---
 
 <!doctype html>
@@ -10,20 +13,27 @@ import Header from "../components/header.astro";
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Argom Seals S.L.</title>
+		<title>{title}</title>
 	</head>
 	<body>
-		<header>
+		<p>´´´TODO  add last product view´´´</p>
+		<header class="mb-20">
 			<Header />
 		</header>
-		<slot />
+		<div class="grid grid-cols-6 grid-rows-5 gap-4 m-15">
+			<div class="sm:col-span-2 md:col-span-2 xl:col-span-1 row-span-5 rounded-xl pt-5"> <Menu /> </div>
+			<div class="sm:col-span-4 md:col-span-4 xl:col-span-5 row-span-5 rounded-xl">
+				<slot />
+			</div>
+		</div>
 	</body>
 </html>
 
 <style>
 	html,
 	body {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+			"Helvetica Neue", Arial, sans-serif;
 		margin: 0;
 		width: 100%;
 		height: 100%;

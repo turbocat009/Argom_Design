@@ -1,0 +1,29 @@
+---
+import Item from "./item.astro";
+import { types } from "../data/types";
+const id = Astro.params.id;
+type Subtype = {
+    name: string;
+    content?: { name: string; description: string }[];
+};
+type InfoType = { id: string; subtypes?: Subtype[] } | null;
+
+const info: InfoType = types.find((b) => b.id === id) || null;
+---
+
+<div>
+    <div
+        class="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 m-5"
+    >
+        {
+            info?.subtypes?.map((subtype) => {
+                if (subtype.content) {
+                    return subtype.content.map(({ name, description }) => {
+                        return <Item title={name} description={description} />;
+                    });
+                }
+                return null;
+            })
+        }
+    </div>
+</div>
