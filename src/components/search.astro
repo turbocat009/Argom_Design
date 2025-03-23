@@ -11,7 +11,7 @@ const info = types.find((b) => b.id === id) || null;
             >TODOS LOS TIPOS</button
         >
         {
-            info.subtypes.map(({ name }) => (
+            info.subtypes?.map(({ name }) => (
                 <button class="ml-[10px] rounded-[10px] border-1 border-[#00000050] py-1 px-2 text-[10px] hover:bg-[#00000030] transition">
                     {name}
                 </button>
@@ -20,7 +20,7 @@ const info = types.find((b) => b.id === id) || null;
     </div>
     <div class="flex gap-10">
         {
-            info.searchValues.map(({ name }) => {
+            info.searchValues?.map(({ name }) => {
                 if (name === "Exterior") {
                     return (
                         <input

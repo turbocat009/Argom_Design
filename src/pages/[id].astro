@@ -4,33 +4,46 @@ import Search from "../components/search.astro";
 import Categories from "../components/categories.astro";
 import { types } from "../data/types";
 
+export const prerender = true;
+
 const id = Astro.params.id;
 const info = types.find((b) => b.id === id) || null;
 
 export function getStaticPaths() {
-    return [
-        ...types.map(({ id }) => {
-            return { params: { id } };
-        }),
-    ];
+    if (!types || !Array.isArray(types)) {
+        console.error("Error: 'types' is undefined or not an array.");
+        return [];
+    }
+
+    return types.map(({ id }) => {
+        return { params: { id } };
+    });
 }
 ---
 
-<Layout title={`${info?.name}`}>
+<Layout title={info ? info.name : "Not Found"}>
     {
         info ? (
-            info.subtypes?.map(({ name }) => 
-               <h1 class="text-4xl font-normal">{`${info?.name}`}</h1>
+            <>
+                <h1 class="text-4xl font-normal">{info.name}</h1>
                 <section class="mt-4">
                     <Search />
                 </section>
                 <main>
                     <Categories />
-                </main> 
-        )
+                </main>
+            </>
         ) : (
-            <p>No data available for this ID</p>
+            <div class="text-center mt-10">
+                <h1 class="text-4xl font-bold text-red-500">404 - Not Found</h1>
+                <p class="text-lg mt-4">
+                    The page you're looking for does not exist or has no data
+                    available.
+                </p>
+                <a href="/" class="text-blue-500 underline mt-4">
+                    Go back to the homepage
+                </a>
+            </div>
         )
     }
-    
 </Layout>
