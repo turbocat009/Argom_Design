@@ -5,7 +5,7 @@ import Categories from "../components/categories.astro";
 import { types } from "../data/types";
 
 const id = Astro.params.id;
-const info = types.find((b) => b.id === id);
+const info = types.find((b) => b.id === id) || null;
 
 export function getStaticPaths() {
     return [
@@ -17,11 +17,20 @@ export function getStaticPaths() {
 ---
 
 <Layout title={`${info?.name}`}>
-    <h1 class="text-4xl font-normal">{`${info?.name}`}</h1>
-    <section class="mt-4">
-        <Search />
-    </section>
-    <main>
-        <Categories />
-    </main>
+    {
+        info ? (
+            info.subtypes?.map(({ name }) => 
+               <h1 class="text-4xl font-normal">{`${info?.name}`}</h1>
+                <section class="mt-4">
+                    <Search />
+                </section>
+                <main>
+                    <Categories />
+                </main> 
+        )
+        ) : (
+            <p>No data available for this ID</p>
+        )
+    }
+    
 </Layout>
