@@ -1,13 +1,13 @@
 ---
-const { title, image, description } = Astro.props;
+const { title, image, description, type } = Astro.props;
 ---
 
 
-<div class="bg-[#00000010] rounded-xl p-4 max-w-[500px]">
+<a href=`/${type}/${title}` class="bg-[#00000010] rounded-xl p-4 max-w-[500px]">
     <h1 class="font-semibold text-2xl">{title}</h1>
     <img 
         class="flex size-50" 
         src="/favicon.svg" 
         alt=`foto del producto ${title}`>
     <p class="pt-10">{description}</p>
-</div>
+</a>

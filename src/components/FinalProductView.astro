@@ -1,0 +1,33 @@
+---
+import { type } from "../data/rascadores.js";
+import ItemFinal from "./itemFinal.astro";
+
+const { XD } = Astro.props;
+---
+
+<div
+    class="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-10 m-5"
+>
+    <p class="text-5xl font-black">Reload page to see animation</p>
+    {
+        type?.map((id) => {
+            if (id.id === XD) {
+                return id.content ? (
+                    id.content.map((content) => {
+                        return (
+                            <div>
+                                <ItemFinal
+                                    title={content.name}
+                                    description=""
+                                    stock={content.stock}
+                                />
+                            </div>
+                        );
+                    })
+                ) : (
+                    <h1>No Content Available</h1>
+                );
+            }
+        })
+    }
+</div>

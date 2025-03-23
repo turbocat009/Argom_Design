@@ -1,0 +1,73 @@
+---
+const { title, image, description, type, stock } = Astro.props;
+---
+
+<div class="relative max-w-[300px] max-h-[300px] h-full w-full" id="info">
+    <button
+        class="bg-[#00000010] rounded-xl p-4 w-full h-full relative"
+    >
+        <h1 class="font-semibold text-2xl text-start">{title}</h1>
+        <img
+            class="flex size-50"
+            src="/favicon.svg"
+            alt={`foto del producto ${title}`}
+        />
+        <p class="pt-10">{description}</p>
+    </button>
+    <button
+        id="item"
+        class="hidden flex flex-col bg-[#ff5d05b6] rounded-xl p-4 w-full h-full justify-start text-start text-white absolute top-0 left-0 max-h-[300px] transition-all duration-500"
+    >
+        <h1 class="font-semibold text-2xl text-start">{title}</h1>
+
+        <a
+            class="text-start"
+            rel="noreferrer"
+            target="_blank"
+            href="https://youtu.be/jJwVL5w_B3c?si=OGevD3E2ZjLiV7yR"
+        >
+            Download PDF</a
+        >
+        <p>Stock: {stock}</p>
+        <input
+            type="number"
+            name="Amount"
+            id=""
+            placeholder="Amount"
+            class="border-2 border-[ffffff] rounded-lg p-2"
+            min="1"
+            id="amount"
+        />
+        <img
+            src="/cart.svg"
+            class="size-20 mt-10"
+            alt="Add to cart"
+            style="filter: invert(1);"
+            id="cart"
+        />
+    </button>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("#info").forEach(infoElement => {
+            infoElement.addEventListener("click", () => {
+                const itemElement = infoElement.querySelector("#item");
+                if (itemElement) {
+                    itemElement.classList.toggle("hidden");
+                }
+            });
+        });
+
+        document.querySelectorAll("#cart").forEach(cartButton => {
+            cartButton.addEventListener("click", (event) => {
+                event.stopPropagation(); // Prevents triggering parent click event
+                const infoElement = cartButton.closest("#info");
+                const amount = infoElement ? infoElement.querySelector("#amount") : null;
+                alert(`Added to cart. Amount: ${amount instanceof HTMLInputElement ? amount.value : undefined}`);
+            });
+        });
+    });
+
+
+</script>

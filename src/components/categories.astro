@@ -9,6 +9,8 @@ type Subtype = {
 type InfoType = { id: string; subtypes?: Subtype[] } | null;
 
 const info: InfoType = types.find((b) => b.id === id) || null;
+
+const { mainType } = Astro.props;
 ---
 
 <div>
@@ -19,7 +21,7 @@ const info: InfoType = types.find((b) => b.id === id) || null;
             info?.subtypes?.map((subtype) => {
                 if (subtype.content) {
                     return subtype.content.map(({ name, description }) => {
-                        return <Item title={name} description={description} />;
+                        return <Item title={name} description={description} type={mainType}/>;
                     });
                 }
                 return null;
