@@ -11,8 +11,8 @@ import FinalProductView from "../../components/FinalProductView.astro";
 
 export const prerender = true;
 
-const id = Astro.params.id;
-const info = type.find((b) => b.id === id) || null;
+const pice = Astro.params.id;
+const info = type.find((b) => b.id === pice) || null;
 
 export function getStaticPaths() {
     if (!type || !Array.isArray(type)) {
@@ -26,7 +26,7 @@ export function getStaticPaths() {
 }
 ---
 
-<Layout title=`${previousPageId} > ${id}`>
+<Layout title=`${previousPageId} > ${pice}`>
     {
         info ? (
             <>
@@ -40,7 +40,9 @@ export function getStaticPaths() {
                     <SearchValues />
                 </section>
                 <main>
-                    <FinalProductView XD={info.id}/>
+                    <FinalProductView XD={info.id
+                        
+                    }/>
                 </main>
             </>
         ) : (
