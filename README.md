@@ -4,7 +4,9 @@ A design for a web, I've been working for.
 
 ## How to install
 `git clone https://github.com/turbocat009/Argom_Design.git`
+>
 `cd Argom-Design`
+>
 `pnpm install`
 
 ## Commands
