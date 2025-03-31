@@ -1,18 +1,19 @@
+
 ---
 const previousPageId = Astro.url.pathname
     .split("/")
     .slice(-2, -1)[0]
     .toUpperCase();
 import type { GetStaticPaths } from "astro";
-import Layout from "../../layouts/Layout.astro";
-import { type } from "../../data/rascadores.js";
-import SearchValues from "../../components/searchValues.astro";
-import FinalProductView from "../../components/FinalProductView.astro";
+import Layout from "../layouts/Layout.astro";
+import { type } from "../data/rascadores.js";
+import SearchValues from "../components/searchValues.astro";
+import FinalProductView from "../components/FinalProductView.astro";
 
 export const prerender = true;
 
-const pice = Astro.params.id;
-const info = type.find((b) => b.id === pice) || null;
+const { pice } = Astro.params;
+const info = type.find((b) => b.pice === pice) || null;
 
 export function getStaticPaths() {
     if (!type || !Array.isArray(type)) {
@@ -20,27 +21,27 @@ export function getStaticPaths() {
         return [];
     }
 
-    return type.map(({ id }) => {
-        return { params: { id } };
+    return type.map(({ pice }) => {
+        return { params: { pice } };
     });
 }
 ---
 
-<Layout title=`${previousPageId} > ${pice}`>
+<Layout title=`${info?.Subtipe} > ${pice}`>
     {
         info ? (
             <>
                 <h1 class="text-4xl font-normal">
                     <a class="text-[#0007]" href="./">
-                        {previousPageId}
+                        {info?.Subtipe}
                     </a>
-                    <span class="p-2">></span> {info.id}
+                    <span class="p-2">></span> {info.pice}
                 </h1>
                 <section class="mt-4">
                     <SearchValues />
                 </section>
                 <main>
-                    <FinalProductView XD={info.id
+                    <FinalProductView XD={info.pice
                         
                     }/>
                 </main>

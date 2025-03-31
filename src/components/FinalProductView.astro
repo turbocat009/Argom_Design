@@ -11,7 +11,7 @@ const { XD } = Astro.props;
     <p class="text-5xl font-black">Reload page to see animation</p>
     {
         type?.map((id) => {
-            if (id.id === XD) {
+            if (id.pice === XD) {
                 return id.content ? (
                     id.content.map((content) => {
                         return (
